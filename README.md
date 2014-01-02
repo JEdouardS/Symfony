@@ -20,6 +20,17 @@ Bundles
 
 Les bundles BazingaGeocoder et LiipImageBundle n'ont pas été utilisés
 
+Installation
+------------
+Lancez les commandes suivantes:
+
+    php composer.phar install
+
+    app/console assetic:dump
+
+    app/console doctrine:schema:create
+
+
 1) Inscrivez-vous/connectez-vous
 -----------------
 Le menu à droite permet d'effectuer les différentes actions.
@@ -35,6 +46,7 @@ Editez ou supprimez votre série et validez.
 4) Accédez à l'espace d'administration
 --------------------------------------
 Seul l'administrateur le peut
+
 log: dou
 mdp: dou
 
