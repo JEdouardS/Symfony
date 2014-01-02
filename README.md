@@ -1,3 +1,46 @@
+Rendu Symfony2 par Jean-Edouard Sastre IIM A3 Groupe 1
+======================================================
+
+Description
+-----------
+A l'origine un projet de géocalisation (d'où la présence du bundle BazingaGeocoder)
+mais reconverti en projet d'upload de sons par manque de temps pour apréhender la géolocalisation.
+
+Ce projet a donc pour but d'offrir les génériques emblématiques de différentes séries télévisées/de jeu vidéo
+issus de la Pop Culture.
+
+Bundles
+-------
+
+- FOSUserBundle
+- Sonata Admin
+- BazingaGeocoder
+- VichUploaderBundle
+- LiipImagineBundle
+
+Les bundles BazingaGeocoder et LiipImageBundle n'ont pas été utilisés
+
+1) Inscrivez-vous/connectez-vous
+-----------------
+Le menu à droite permet d'effectuer les différentes actions.
+
+2) Créez une série
+------------------
+Renseignez les différents champs en téléchargeant le générique de votre série (format audio)
+
+3) Editez/supprimmez
+--------------------
+Editez ou supprimez votre série et validez.
+
+4) Accédez à l'espace d'administration
+--------------------------------------
+Seul l'administrateur le peut
+log: dou
+mdp: dou
+
+
+
+
 Symfony Standard Edition
 ========================
 
