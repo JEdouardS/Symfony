@@ -18,6 +18,7 @@ use iim\BlogBundle\Form\ArticleType;
 class ArticleController extends Controller
 {
 
+
     /**
      * Lists all Article entities.
      *
@@ -27,7 +28,9 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        $entities = $this->get('article.manager')->findAll();
+
+
+        $entities =  $this->get('article.manager')->findAll();
 
 
         return array(
@@ -66,6 +69,8 @@ class ArticleController extends Controller
 
 
 
+
+
     /**
      * Finds and displays a Article entity.
      *
@@ -75,6 +80,8 @@ class ArticleController extends Controller
      */
     public function showAction($id)
     {
+
+
         $entity = $this->get('article.manager')->find($id);
 
         if (!$entity) {
@@ -98,10 +105,11 @@ class ArticleController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $entity = $this->get('article.manager')->find($id);
 
-        $form = $this->createForm('article', $entity, array(
-            'action' => $this->generateUrl('article_edit',array('id'=>$id)),
+        $article = $this->get('article.manager')->find($id);
+
+        $form = $this->createForm('article', $article, array(
+            'action' => $this->generateUrl('article_edit',array('id' => $id)),
             'method' => 'POST',
         ));
         $form->add('submit', 'submit', array('label' => 'Edit'));
@@ -117,9 +125,8 @@ class ArticleController extends Controller
         }
 
         return array(
-            'article' => $entity,
             'edit_form'   => $form->createView(),
-            'delete_form' => $this->createDeleteForm($id)->createView()
+            'delete_form' => $this->createDeleteForm($id)->createView(),
         );
     }
 
@@ -136,8 +143,8 @@ class ArticleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $entity = $this->get('article.manager')->find($id);
 
+            $entity = $this->get('article.manager')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Article entity.');
@@ -164,6 +171,6 @@ class ArticleController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
-        ;
+            ;
     }
 }

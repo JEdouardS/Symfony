@@ -26,6 +26,7 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    trusted_proxies: ['127.0.0.1']
 
 # Twig Configuration
 twig:
@@ -36,7 +37,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ iimBlogBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -143,3 +144,48 @@ sonata_block:
        sonata.block.service.text:
        sonata.block.service.action:
        sonata.block.service.rss:
+
+vich_uploader:
+    db_driver: orm
+    twig: true
+    gaufrette: false # set to true to enable gaufrette support
+    storage: vich_uploader.storage.file_system
+    mappings:
+            article_sound:
+                uri_prefix: /uploads/articles
+                upload_destination: uploads/articles
+                delete_on_remove: true # determines whether to delete file upon removal of entity
+                inject_on_load: true # determines whether to inject a File instance upon load
+
+liip_imagine:
+    filter_sets:
+        my_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
+
+bazinga_geocoder:
+    fake_ip:
+        enabled:              true
+        ip:                   ~
+        priority:             0
+    adapter:
+        class:                ~
+    providers:
+
+        google_maps:
+            locale:               ~
+            region:               ~
+            use_ssl:              false
+
+
+        data_science_toolkit:  []
+        yandex:
+            locale:               ~
+            toponym:              ~
+        geo_ips:
+            api_key:              ~
+        geo_plugin:           []
+
+        chain:
+            providers:            []

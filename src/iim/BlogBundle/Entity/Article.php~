@@ -3,15 +3,21 @@
 namespace iim\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Article
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="iim\BlogBundle\Entity\ArticleRepository")
+ * @Vich\Uploadable
  */
 class Article
 {
+use ORMBehaviors\Timestampable\Timestampable;
     /**
      * @var integer
      *
@@ -42,13 +48,6 @@ class Article
     private $author;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="datetime")
-     */
-    private $date;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean")
@@ -56,11 +55,23 @@ class Article
     private $enabled;
 
     /**
-     * @var \DateTime
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
      *
-     * @ORM\Column(name="updatedAt", type="datetime", nullable = true)
+     * @var File $image
      */
-    private $updatedAt;
+    protected $image;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="image_name")
+     *
+     * @var string $imageName
+     */
+    protected $imageName;
+
 
     /**
      * Get id
@@ -141,28 +152,6 @@ class Article
         return $this->author;
     }
 
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     * @return Article
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime 
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
 
     /**
      * Set enabled
@@ -189,26 +178,5 @@ class Article
 
 
 
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return Article
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
 
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
 }

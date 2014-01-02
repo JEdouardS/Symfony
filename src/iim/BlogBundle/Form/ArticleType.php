@@ -19,6 +19,8 @@ class ArticleType extends AbstractType
             ->add('content')
             ->add('author')
             ->add('enabled')
+            ->add('sound')
+
         ;
     }
     

@@ -1,48 +1,36 @@
-{% extends '::base.html.twig' %}
+{% extends "iimBlogBundle::layout.html.twig" %}
+
+{% block title %}
+    Lecture d'un article - {{ parent() }}
+{% endblock %}
 
 {% block body -%}
-    <h1>Article</h1>
+    <h2>{{ entity.name }}</h2>
+    <i>Par {{ entity.author  }}, le {{  entity.createdAt|date('Y-m-d H:i:s')  }}</i>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ entity.content }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>{{ entity.author }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Enabled</th>
-                <td>{{ entity.enabled }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="well">
+        {{entity.content }}
+    </div>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('article') }}">
-            Back to the list
+    <h3>Le générique</h3>
+    <audio controls>
+        <source src="{{ asset(entity.sound) }}" type="audio/mpeg">
+        <source src="{{ asset(entity.sound) }}" type="audio/ogg">
+        <embed height="50" width="100" src="{{ asset(entity.sound) }}">
+    </audio>
+
+
+    <p>
+        <a href="{{ path('article') }}" class="btn btn-default">
+            Retour à la liste
         </a>
-    </li>
-    <li>
-        <a href="{{ path('article_edit', { 'id': entity.id }) }}">
-            Edit
+        <a href="{{ path('article_edit', { 'id': entity.id }) }}" class="btn btn-warning">
+            Modifier l'article
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        <a href="" class="btn">
+            {{ form(delete_form) }}
+        </a>
+    </p>
+
+
 {% endblock %}

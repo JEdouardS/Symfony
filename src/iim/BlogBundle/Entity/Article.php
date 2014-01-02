@@ -4,16 +4,21 @@ namespace iim\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Article
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="iim\BlogBundle\Entity\ArticleRepository")
+ * @Vich\Uploadable
  */
 class Article
 {
-use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Timestampable\Timestampable;
+
     /**
      * @var integer
      *
@@ -50,11 +55,30 @@ use ORMBehaviors\Timestampable\Timestampable;
      */
     private $enabled;
 
+    /**
+     * @Assert\File(
+     *     maxSize="20M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg", "audio/mpeg"}
+     * )
+     * @Vich\UploadableField(mapping="article_sound", fileNameProperty="soundName")
+     *
+     * @var File $sound
+     */
+    protected $sound;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="sound_name")
+     *
+     * @var string $soundName
+     */
+    protected $soundName;
+
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +101,7 @@ use ORMBehaviors\Timestampable\Timestampable;
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -100,7 +124,7 @@ use ORMBehaviors\Timestampable\Timestampable;
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -130,7 +154,6 @@ use ORMBehaviors\Timestampable\Timestampable;
         return $this->author;
     }
 
-
     /**
      * Set enabled
      *
@@ -147,11 +170,49 @@ use ORMBehaviors\Timestampable\Timestampable;
     /**
      * Get enabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Set soundName
+     *
+     * @param string $soundName
+     * @return Article
+     */
+    public function setSoundName($soundName)
+    {
+        $this->soundName = $soundName;
+
+        return $this;
+    }
+
+    /**
+     * Get soundName
+     *
+     * @return string
+     */
+    public function getSoundName()
+    {
+        return $this->soundName;
+    }
+
+
+    public function setSound($sound)
+    {
+        $this->sound = $sound;
+
+        return $this;
+
+    }
+    public function getSound()
+    {
+        return $this->sound;
+
+
     }
 
 

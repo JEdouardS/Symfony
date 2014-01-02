@@ -21,7 +21,10 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "v1.3.3",
         "knplabs/doctrine-behaviors": "v1.0.0",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master"
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+        "willdurand/geocoder-bundle": "@stable",
+        "vich/uploader-bundle": "dev-master",
+        "liip/imagine-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
